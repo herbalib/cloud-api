@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_onboarding"
+    app:layoutDescription="@xml/activity_onboarding_scene"
     tools:context=".OnboardingActivity">
 
     <LinearLayout
         android:id="@+id/linear_layout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="118dp"
+        android:layout_marginTop="96dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +44,6 @@
         android:layout_width="279dp"
         android:layout_height="272dp"
         android:layout_marginTop="55dp"
-        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
+                android:contentDescription="@string/onboarding1_image"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -68,9 +69,9 @@
                 android:id="@+id/tv_onboarding1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Informasi Tanaman Obat"
+                android:text="@string/onboarding1_title"
                 android:textColor="@color/sacramento"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +86,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="29dp"
                 android:fontFamily="@font/inter"
-                android:text="Carilah informasi mengenai informasi tanaman obat yang terdapat disekitarmu"
+                android:text="@string/onboarding1_description"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
                 android:textSize="14sp"
@@ -93,7 +94,129 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_onboarding1"
-                app:lineHeight="20dp" />
+                app:lineHeight="20dp"
+                tools:ignore="TextContrastCheck" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_onboarding2"
+        android:layout_width="279dp"
+        android:layout_height="252dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="65dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toEndOf="@+id/cv_onboarding1"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_onboarding2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:contentDescription="@string/onboarding2_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/onboarding1" />
+
+            <TextView
+                android:id="@+id/tv_onboarding2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/onboarding2_title"
+                android:textColor="@color/sacramento"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_onboarding2" />
+
+            <TextView
+                android:id="@+id/tv_onboarding2_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="29dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/onboarding2_description"
+                android:textAlignment="center"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_onboarding2"
+                app:lineHeight="20dp"
+                tools:ignore="TextContrastCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_onboarding3"
+        android:layout_width="279dp"
+        android:layout_height="252dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="65dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toEndOf="@+id/cv_onboarding2"
+        app:layout_constraintTop_toBottomOf="@+id/linear_layout_header">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_onboarding3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:contentDescription="@string/onboarding3_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/onboarding1" />
+
+            <TextView
+                android:id="@+id/tv_onboarding3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/onboarding3_title"
+                android:textColor="@color/sacramento"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_onboarding3" />
+
+            <TextView
+                android:id="@+id/tv_onboarding3_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="29dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/onboarding3_description"
+                android:textAlignment="center"
+                android:textColor="@color/gray"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_onboarding3"
+                app:lineHeight="20dp"
+                tools:ignore="TextContrastCheck" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -164,5 +287,4 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_have_account" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
