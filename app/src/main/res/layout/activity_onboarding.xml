@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_onboarding"
     app:layoutDescription="@xml/activity_onboarding_scene"
-    tools:context=".OnboardingActivity">
+    tools:context=".ui.onboarding.OnboardingActivity">
 
     <LinearLayout
         android:id="@+id/linear_layout_header"

@@ -1,18 +1,31 @@
-package com.rickyandrean.herbapedia
+package com.rickyandrean.herbapedia.ui.onboarding
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.rickyandrean.herbapedia.databinding.ActivityOnboardingBinding
+import com.rickyandrean.herbapedia.ui.login.LoginActivity
 
 class OnboardingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOnboardingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_onboarding)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         setupView()
+
+        binding.btnLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
+
+        binding.btnRegister.setOnClickListener {
+
+        }
     }
 
     private fun setupView() {
