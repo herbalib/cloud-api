@@ -1,33 +1,37 @@
-package com.rickyandrean.herbapedia.ui.onboarding
+package com.rickyandrean.herbapedia.ui.register
 
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
-import com.rickyandrean.herbapedia.databinding.ActivityOnboardingBinding
+import com.rickyandrean.herbapedia.databinding.ActivityRegisterBinding
 import com.rickyandrean.herbapedia.ui.login.LoginActivity
-import com.rickyandrean.herbapedia.ui.register.RegisterActivity
+import com.rickyandrean.herbapedia.ui.onboarding.OnboardingActivity
 
-class OnboardingActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityOnboardingBinding
+class RegisterActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupView()
 
-        binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java), ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
+        binding.btnBackOnboarding.setOnClickListener {
+            val intent = Intent(this, OnboardingActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
+            finish()
         }
 
-        binding.btnRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java), ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
+        binding.btnLoginPage.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
+            finish()
         }
     }
 

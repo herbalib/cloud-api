@@ -2,6 +2,7 @@
     <string name="app_name">Herbapedia</string>
     <string name="logo">Logo Herbapedia</string>
     <string name="register">Register</string>
+    <string name="register_underline"><u>Register</u></string>
     <string name="login">Login</string>
     <string name="no_account_message">Don\'t have an account?</string>
     <string name="have_account_message">Already have an account?</string>
@@ -14,4 +15,10 @@
     <string name="onboarding3_image">Onboarding 3 Image</string>
     <string name="onboarding3_title">Informasi Tanaman Obat 3</string>
     <string name="onboarding3_description">3 Carilah informasi mengenai informasi tanaman obat yang terdapat disekitarmu</string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="register_header">Welcome back</string>
+    <string name="register_subheader">Login to your account</string>
+    <string name="hint_email_username">email/username</string>
+    <string name="hint_password">password</string>
+    <string name="back_button">Back Button</string>
 </resources>
