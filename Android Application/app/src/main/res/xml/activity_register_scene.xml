@@ -15,8 +15,8 @@
         <Constraint
             android:id="@+id/cv_register"
             android:layout_width="match_parent"
-            android:layout_height="555dp"
-            android:layout_marginBottom="-555dp"
+            android:layout_height="710dp"
+            android:layout_marginBottom="-710dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"/>
@@ -36,7 +36,7 @@
         <Constraint
             android:id="@+id/cv_register"
             android:layout_width="match_parent"
-            android:layout_height="555dp"
+            android:layout_height="710dp"
             android:layout_marginBottom="-32dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="55dp"
             android:layout_marginStart="31dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"/>
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"/>
     </ConstraintSet>
 </MotionScene>

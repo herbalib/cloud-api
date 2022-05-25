@@ -4,6 +4,7 @@
     <string name="register">Register</string>
     <string name="register_underline"><u>Register</u></string>
     <string name="login">Login</string>
+    <string name="login_underline"><u>Login</u></string>
     <string name="no_account_message">Don\'t have an account?</string>
     <string name="have_account_message">Already have an account?</string>
     <string name="onboarding1_image">Onboarding 1 Image</string>
@@ -21,4 +22,10 @@
     <string name="hint_email_username">email/username</string>
     <string name="hint_password">password</string>
     <string name="back_button">Back Button</string>
+    <string name="login_subheader">Create your account</string>
+    <string name="hint_email">email</string>
+    <string name="hint_full_name">full name</string>
+    <string name="hint_confirm_password">confirm password</string>
+    <string name="terms_condition"><u>Terms &amp; Conditions</u></string>
+    <string name="register_note">By signing you <b>agree</b> to our</string>
 </resources>
