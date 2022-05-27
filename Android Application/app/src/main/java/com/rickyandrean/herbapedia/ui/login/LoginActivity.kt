@@ -8,6 +8,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
 import com.rickyandrean.herbapedia.databinding.ActivityLoginBinding
+import com.rickyandrean.herbapedia.ui.main.MainActivity
 import com.rickyandrean.herbapedia.ui.onboarding.OnboardingActivity
 import com.rickyandrean.herbapedia.ui.register.RegisterActivity
 
@@ -34,18 +35,16 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle())
             finish()
         }
+
+        binding.btnLogin.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setupView() {
-//        @Suppress("DEPRECATION")
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-//            window.insetsController?.hide(WindowInsets.Type.statusBars())
-//        } else {
-//            window.setFlags(
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN
-//            )
-//        }
         supportActionBar?.hide()
 
         // hide bottom navigation bar

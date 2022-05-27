@@ -167,7 +167,8 @@
                     android:fontFamily="@font/inter"
                     android:text="@string/no_account_message"
                     android:textColor="@color/gray"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
                     android:id="@+id/tv_register"
