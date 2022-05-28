@@ -32,4 +32,7 @@
     <string name="title_home">Home</string>
     <string name="title_plants">Plants</string>
     <string name="title_maps">Maps</string>
+    <string name="icon_setting">Icon Setting</string>
+    <string name="greeting_header">Hi, Theophil</string>
+    <string name="greeting_subheader">have a great day!</string>
 </resources>
