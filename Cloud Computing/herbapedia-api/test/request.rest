@@ -1,1 +1,12 @@
-GET http://localhost:8080/posts
+GET http://localhost:3000/plants
+
+###
+GET http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email":"ana@gmail.com",
+    "password":"password"
+}
+###
+GET http://localhost:3000/logout
