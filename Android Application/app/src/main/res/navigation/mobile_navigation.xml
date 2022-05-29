@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.rickyandrean.herbapedia.ui.main.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_plants"
+            app:destination="@id/navigation_plants" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_plants"
