@@ -7,7 +7,7 @@
     tools:context=".ui.main.ui.home.HomeFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_search"
+        android:id="@+id/cv_home_search"
         android:transitionName="home_search"
         android:layout_width="0dp"
         android:layout_height="51dp"
@@ -61,7 +61,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_scan"
+        android:id="@+id/cv_home_scan"
         android:transitionName="home_scan"
         android:layout_width="51dp"
         android:layout_height="51dp"

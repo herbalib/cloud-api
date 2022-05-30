@@ -7,8 +7,8 @@
     tools:context=".ui.main.ui.plants.PlantsFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_search"
-        android:transitionName="search"
+        android:id="@+id/cv_plants_search"
+        android:transitionName="plants_search"
         android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_marginTop="0dp"
@@ -43,6 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ti_search_plant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_search_plant"
@@ -58,8 +59,8 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_scan"
-        android:transitionName="scan"
+        android:id="@+id/cv_plants_scan"
+        android:transitionName="plants_scan"
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginTop="0dp"

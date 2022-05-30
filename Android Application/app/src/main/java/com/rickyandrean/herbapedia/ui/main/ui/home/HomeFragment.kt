@@ -1,6 +1,7 @@
 package com.rickyandrean.herbapedia.ui.main.ui.home
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,13 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val animation = TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = animation
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,8 +54,9 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
             navView.menu.getItem(1).isChecked = true
 
             MainActivity.stack.add(1)
+            MainActivity.searchAnimation = true
 
-            val extras = FragmentNavigatorExtras(binding.cvHome to "plants", binding.cvSearch to "search", binding.cvScan to "scan")
+            val extras = FragmentNavigatorExtras(binding.cvHome to "plants", binding.cvHomeSearch to "plants_search", binding.cvHomeScan to "plants_scan")
             findNavController().navigate(
                 R.id.action_navigation_home_to_navigation_plants,
                 null,

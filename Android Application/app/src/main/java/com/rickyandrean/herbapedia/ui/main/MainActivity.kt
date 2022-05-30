@@ -3,9 +3,11 @@ package com.rickyandrean.herbapedia.ui.main
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.navigation.NavigationBarView
 import com.rickyandrean.herbapedia.R
@@ -48,11 +50,13 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                     is PlantsFragment -> {
                         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
                         val navController = navHostFragment.navController
+                        val extras = FragmentNavigatorExtras(findViewById<View>(R.id.cv_plants) to "home", findViewById<View>(R.id.cv_plants_search) to "home_search", findViewById<View>(R.id.cv_plants_scan) to "home_scan")
 
                         navController.navigate(
                             R.id.action_navigation_plants_to_navigation_home,
                             null,
-                            null
+                            null,
+                            extras
                         )
                         updateStack(0)
                     }
@@ -74,11 +78,13 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                     is HomeFragment -> {
                         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
                         val navController = navHostFragment.navController
+                        val extras = FragmentNavigatorExtras(findViewById<View>(R.id.cv_home) to "plants", findViewById<View>(R.id.cv_home_search) to "plants_search", findViewById<View>(R.id.cv_home_scan) to "plants_scan")
 
                         navController.navigate(
                             R.id.action_navigation_home_to_navigation_plants,
                             null,
-                            null
+                            null,
+                            extras
                         )
                         updateStack(1)
                     }
@@ -159,5 +165,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
     companion object {
         val stack = mutableListOf<Int>()
+        var searchAnimation = false
     }
 }
