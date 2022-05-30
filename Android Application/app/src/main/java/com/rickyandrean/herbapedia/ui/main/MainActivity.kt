@@ -2,17 +2,19 @@ package com.rickyandrean.herbapedia.ui.main
 
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.navigation.NavigationBarView
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.ActivityMainBinding
+import com.rickyandrean.herbapedia.ui.main.ui.home.HomeFragment
+import com.rickyandrean.herbapedia.ui.main.ui.maps.MapsFragment
+import com.rickyandrean.herbapedia.ui.main.ui.plants.PlantsFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,14 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         setupView()
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_plants, R.id.navigation_maps
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.navView.setupWithNavController(navController)
+        stack.add(0)
+        binding.navView.setOnItemSelectedListener(this)
     }
 
     private fun setupView() {
@@ -43,5 +39,125 @@ class MainActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                when (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)!!.childFragmentManager.fragments[0]) {
+                    is PlantsFragment -> {
+                        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+                        val navController = navHostFragment.navController
+
+                        navController.navigate(
+                            R.id.action_navigation_plants_to_navigation_home,
+                            null,
+                            null
+                        )
+                        updateStack(0)
+                    }
+                    is MapsFragment -> {
+                        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+                        val navController = navHostFragment.navController
+
+                        navController.navigate(
+                            R.id.action_navigation_maps_to_navigation_home,
+                            null,
+                            null
+                        )
+                        updateStack(0)
+                    }
+                }
+            }
+            R.id.navigation_plants -> {
+                when (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)!!.childFragmentManager.fragments[0]) {
+                    is HomeFragment -> {
+                        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+                        val navController = navHostFragment.navController
+
+                        navController.navigate(
+                            R.id.action_navigation_home_to_navigation_plants,
+                            null,
+                            null
+                        )
+                        updateStack(1)
+                    }
+                    is MapsFragment -> {
+                        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+                        val navController = navHostFragment.navController
+
+                        navController.navigate(
+                            R.id.action_navigation_maps_to_navigation_plants,
+                            null,
+                            null
+                        )
+                        updateStack(1)
+                    }
+                }
+            }
+            R.id.navigation_maps -> {
+                when (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)!!.childFragmentManager.fragments[0]) {
+                    is HomeFragment -> {
+                        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+                        val navController = navHostFragment.navController
+
+                        navController.navigate(
+                            R.id.action_navigation_home_to_navigation_maps,
+                            null,
+                            null
+                        )
+                        updateStack(2)
+                    }
+                    is PlantsFragment -> {
+                        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+                        val navController = navHostFragment.navController
+
+                        navController.navigate(
+                            R.id.action_navigation_plants_to_navigation_maps,
+                            null,
+                            null
+                        )
+                        updateStack(2)
+                    }
+                }
+            }
+        }
+
+        return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        stack.removeLast()
+        updateActiveBottomNavigation()
+    }
+
+    private fun updateStack(id: Int) {
+        when(id) {
+            0 -> {
+                stack.clear()
+                stack.add(0)
+            }
+            else -> {
+                if (id in stack) {
+                    stack.removeLast()
+                } else {
+                    stack.add(id)
+                }
+            }
+        }
+
+        updateActiveBottomNavigation()
+    }
+
+    private fun updateActiveBottomNavigation() {
+        if (stack.isNotEmpty()) {
+            binding.navView.menu.getItem(stack.last()).isChecked = true
+        }
+    }
+
+    companion object {
+        val stack = mutableListOf<Int>()
     }
 }

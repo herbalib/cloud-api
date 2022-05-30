@@ -22,10 +22,11 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginEnd="4dp"
             android:contentDescription="@string/logo"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/logo" />
 
         <TextView
@@ -56,10 +57,11 @@
 
             <ImageView
                 android:id="@+id/iv_onboarding1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
+                android:layout_width="0dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="40dp"
                 android:contentDescription="@string/onboarding1_image"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -117,10 +119,11 @@
 
             <ImageView
                 android:id="@+id/iv_onboarding2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
+                android:layout_width="0dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="40dp"
                 android:contentDescription="@string/onboarding2_image"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -177,10 +180,11 @@
 
             <ImageView
                 android:id="@+id/iv_onboarding3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
+                android:layout_width="0dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="40dp"
                 android:contentDescription="@string/onboarding3_image"
+                android:scaleType="fitCenter"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

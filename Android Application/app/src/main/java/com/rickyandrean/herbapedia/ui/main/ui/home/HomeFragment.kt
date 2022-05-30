@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.FragmentHomeBinding
-import com.rickyandrean.herbapedia.ui.main.ui.plants.PlantsFragment
+import com.rickyandrean.herbapedia.ui.main.MainActivity
 
 class HomeFragment : Fragment(), View.OnFocusChangeListener {
     private var _binding: FragmentHomeBinding? = null
@@ -44,6 +42,11 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
         if (v?.id == R.id.text_input_search) {
             binding.textInputSearch.onFocusChangeListener = null
 
+            val navView: BottomNavigationView = requireActivity().findViewById(R.id.nav_view) as BottomNavigationView
+            navView.menu.getItem(1).isChecked = true
+
+            MainActivity.stack.add(1)
+
             val extras = FragmentNavigatorExtras(binding.cvHome to "plants", binding.cvSearch to "search", binding.cvScan to "scan")
             findNavController().navigate(
                 R.id.action_navigation_home_to_navigation_plants,
@@ -51,15 +54,6 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
                 null,
                 extras
             )
-
-//            val fragment = PlantsFragment()
-//            parentFragmentManager.commit {
-//                addSharedElement(binding.cvHome, "plants")
-//                addSharedElement(binding.cvSearch, "search")
-//                addSharedElement(binding.cvScan, "scan")
-//                replace(R.id.nav_host_fragment_activity_main, fragment)
-//                addToBackStack(null)
-//            }
         }
     }
 }

@@ -12,18 +12,48 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_navigation_plants"
-            app:destination="@id/navigation_plants" />
+            app:destination="@id/navigation_plants"
+            app:popUpTo="@id/navigation_plants"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_maps"
+            app:destination="@id/navigation_maps"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/navigation_maps"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_plants"
         android:name="com.rickyandrean.herbapedia.ui.main.ui.plants.PlantsFragment"
         android:label="@string/title_plants"
-        tools:layout="@layout/fragment_plants" />
+        tools:layout="@layout/fragment_plants" >
+        <action
+            android:id="@+id/action_navigation_plants_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_plants_to_navigation_maps"
+            app:destination="@id/navigation_maps"
+            app:popUpTo="@id/navigation_maps"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_maps"
         android:name="com.rickyandrean.herbapedia.ui.main.ui.maps.MapsFragment"
         android:label="@string/title_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps" >
+        <action
+            android:id="@+id/action_navigation_maps_to_navigation_plants"
+            app:destination="@id/navigation_plants"
+            app:popUpTo="@id/navigation_plants"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_maps_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
