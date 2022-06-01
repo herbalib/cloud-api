@@ -1,6 +1,7 @@
 package com.rickyandrean.herbapedia.ui.main.ui.plants
 
 import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -11,12 +12,17 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.rickyandrean.herbapedia.adapter.PlantAdapter
 import com.rickyandrean.herbapedia.databinding.FragmentPlantsBinding
+import com.rickyandrean.herbapedia.model.Plant
 import com.rickyandrean.herbapedia.ui.main.MainActivity
 
 class PlantsFragment : Fragment() {
     private var _binding: FragmentPlantsBinding? = null
     private val binding get() = _binding!!
+    private val plants = ArrayList<Plant>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +50,14 @@ class PlantsFragment : Fragment() {
             imm.showSoftInput(binding.tiSearchPlant, InputMethodManager.SHOW_IMPLICIT)
             MainActivity.searchAnimation = false
         }
+
+        plants.add(Plant("Image", "Name", "Latin", "Nutrient List", "Cure List", "Description"))
+        plants.add(Plant("Image", "Name", "Latin", "Nutrient List", "Cure List", "Description"))
+        plants.add(Plant("Image", "Name", "Latin", "Nutrient List", "Cure List", "Description"))
+
+        binding.rvPlants.setHasFixedSize(true)
+        binding.rvPlants.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvPlants.adapter = PlantAdapter(plants)
     }
 
     override fun onDestroyView() {

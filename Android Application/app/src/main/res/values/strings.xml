@@ -39,4 +39,13 @@
     <string name="icon_scan">Icon Scan</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="icon_maps">Icon Maps</string>
+    <string name="plant_image">Plant Image</string>
+    <string name="plant_name">Plant Name</string>
+    <string name="latin_name">Latin Name</string>
+    <string name="nutrient">NUTRIENT</string>
+    <string name="cure">CURE FOR</string>
+    <string name="nutrient_content">Nutrient Content</string>
+    <string name="cure_content">Cure Content</string>
+    <string name="read_more">Read More</string>
+    <string name="title_activity_detail">DetailActivity</string>
 </resources>
