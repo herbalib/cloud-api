@@ -37,4 +37,6 @@
     <string name="greeting_subheader">have a great day!</string>
     <string name="hint_search_plant">Search plant’s name</string>
     <string name="icon_scan">Icon Scan</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="icon_maps">Icon Maps</string>
 </resources>

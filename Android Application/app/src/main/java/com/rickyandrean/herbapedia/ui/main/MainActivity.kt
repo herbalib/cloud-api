@@ -1,5 +1,6 @@
 package com.rickyandrean.herbapedia.ui.main
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
@@ -15,6 +16,7 @@ import com.rickyandrean.herbapedia.databinding.ActivityMainBinding
 import com.rickyandrean.herbapedia.ui.main.ui.home.HomeFragment
 import com.rickyandrean.herbapedia.ui.main.ui.maps.MapsFragment
 import com.rickyandrean.herbapedia.ui.main.ui.plants.PlantsFragment
+import com.rickyandrean.herbapedia.ui.maps.MapsActivity
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
@@ -25,9 +27,12 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         setContentView(binding.root)
 
         setupView()
-
         stack.add(0)
+
         binding.navView.setOnItemSelectedListener(this)
+        binding.cvMapsMaps.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
+        }
     }
 
     private fun setupView() {
@@ -126,6 +131,9 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                         updateStack(2)
                     }
                 }
+
+                // Redirect ke MapsActivity
+                // OnBackPressed set juga supaya active navigation oke
             }
         }
 
