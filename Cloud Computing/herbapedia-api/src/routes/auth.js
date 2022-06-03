@@ -1,10 +1,11 @@
-require("dotenv").config();
-
 const express = require("express");
-const app = express();
+const router = express.Router();
 
-//Initiate JWT
-const jwt = require("jsonwebtoken");
+const { register, login } = require("../controllers/auth");
 
-//make sure app can use json
-app.use(express.json());
+// Authentication
+router.post("/login", login);
+router.post("/register", register);
+
+
+module.exports = router;

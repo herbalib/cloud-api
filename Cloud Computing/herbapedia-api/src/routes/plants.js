@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getAllPlants } = require("../controllers/plants");
+const {middleware_admin, middleware_user} = require("../helpers/authorize")
+// Load Controller
+const { index, show } = require("../controllers/plants");
 
-//GET: URL/Plants
-router.get("/", getAllPlants)
-
-//GET:
-router.get("/:id", (req, res) => {
-  res.send("Display All plants");
-});
+router.get("/", middleware_admin, index)
+router.get("/:id", middleware_admin, show);
 
 module.exports = router;
