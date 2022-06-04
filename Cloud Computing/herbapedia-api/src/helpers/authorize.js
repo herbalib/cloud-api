@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken')
 require("dotenv").config();
 
-const authorize = (req, res, next, role) => {
+const authorize = (req, res, next, whitelisted_roles) => {
     // BEARER Token
     const authHeader = req.headers['authorization']
     
@@ -12,7 +12,7 @@ const authorize = (req, res, next, role) => {
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => {
         if (err) return res.sendStatus(403) // Unauthorized
-        if(payload.role != role) return res.sendStatus(401) // Check role untuk hak akses
+        if(!whitelisted_roles.includes(payload.role)) return res.sendStatus(401) // Check role untuk hak akses
         req.user_email = payload.email
         next()
     })
@@ -20,11 +20,11 @@ const authorize = (req, res, next, role) => {
 
 //CheckEmailExist
 const middleware_admin = (req, res, next) => {
-    authorize(req, res, next, "admin")
+    authorize(req, res, next, ["admin"])
 }
 
 const middleware_user = (req, res, next) => {
-    authorize(req, res, next, "user")
+    authorize(req, res, next, ["admin", "user"])
 }
 
 //Export All Methods

@@ -8,7 +8,7 @@ const register = (req, res) => {
   con.query("SELECT * FROM users WHERE email = ?",[req.body.email], async (query_err, query_res) => {
     // Return if Error or Email Exists
     if (query_err) return res.status(500).send(query_err)
-    if(query_res.length != 0) return res.status(200).send('Email Already Exists')
+    if(query_res.length != 0) return res.status(500).send('Email Already Exists')
 
     // Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 160419078)
@@ -35,6 +35,7 @@ const login = (req, res) => {
     if(query_res.length == 0) return res.status(500).send('Incorrect Email or Password')
 
     // Get Password 
+    db_name = query_res[0].name
     db_pass = query_res[0].password
     db_role = query_res[0].role
 
@@ -50,7 +51,7 @@ const login = (req, res) => {
         function (query_err, query_res) {
           if (query_err) return res.status(500).send(query_err)
           else if(query_res.affectedRows <= 0) return res.status(500).send("No Affected Rows")
-          else return res.status(200).json({ accessToken: accessToken })
+          else return res.status(200).json({ name: db_name, accessToken: accessToken })
         })
     } else {
       return res.status(500).send('Incorrect Email or Password')
