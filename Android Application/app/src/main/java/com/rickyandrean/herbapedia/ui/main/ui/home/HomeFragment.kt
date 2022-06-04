@@ -1,5 +1,6 @@
 package com.rickyandrean.herbapedia.ui.main.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.FragmentHomeBinding
 import com.rickyandrean.herbapedia.ui.main.MainActivity
+import com.rickyandrean.herbapedia.ui.scan.ScanActivity
 
 class HomeFragment : Fragment(), View.OnFocusChangeListener {
     private var _binding: FragmentHomeBinding? = null
@@ -39,6 +41,11 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
         super.onViewCreated(view, savedInstanceState)
 
         binding.textInputSearch.onFocusChangeListener = this
+
+        binding.cvHomeScan.setOnClickListener {
+            val intent = Intent(requireActivity(), ScanActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

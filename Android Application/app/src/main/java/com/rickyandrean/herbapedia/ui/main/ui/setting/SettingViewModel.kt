@@ -1,10 +1,10 @@
-package com.rickyandrean.herbapedia.ui.main.ui.maps
+package com.rickyandrean.herbapedia.ui.main.ui.setting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MapsViewModel : ViewModel() {
+class SettingViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
