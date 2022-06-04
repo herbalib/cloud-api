@@ -1,4 +1,4 @@
-const con = require("../config/database.js");
+const {con} = require("../config/database.js");
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require("dotenv").config();

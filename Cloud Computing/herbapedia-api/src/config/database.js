@@ -8,12 +8,24 @@ var con = mysql.createConnection({
     database: process.env.DATABASE_SCHEMA
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
 });
 
-module.exports = con
+const query_select = (p_con, sql, params) => {
+    return new Promise((resolve, reject) => {
+        p_con.query(sql, params, (err, result) => {
+            if (err) return reject(err);
+            resolve(result);
+        })
+    })
+}
+
+module.exports = {
+    con,
+    query_select
+}
 
 // Database Schema
 // Database Connectiion Name
