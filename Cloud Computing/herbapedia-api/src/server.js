@@ -16,4 +16,4 @@ app.use("/locations", locations);
 
 const listEndpoints = require("express-list-endpoints"); // npm i express-list-endpoints
 console.log(listEndpoints(app))
-app.listen(3000);
+app.listen(23450);
