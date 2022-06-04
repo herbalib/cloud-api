@@ -48,4 +48,7 @@
     <string name="cure_content">Cure Content</string>
     <string name="read_more">Read More</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="plant_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus leo et ultrices tempus. Vestibulum in ex gravida, lacinia risus nec, bibendum sem.</string>
+    <string name="process">HOW TO PROCESS</string>
+    <string name="process_content">How to process content</string>
 </resources>
