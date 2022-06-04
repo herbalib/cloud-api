@@ -13,7 +13,7 @@ const index = (req, res) => {
   var query_params = []
 
   // For Detail Page, find plant by ID
-  if(req.params.id){
+  if (req.params.id) {
     sql_plant += ` WHERE id = ?`
     query_params.push(req.params.id)
   }
@@ -36,11 +36,20 @@ const index = (req, res) => {
         const nutritions = await query_select(con, sql_nutrition, [plant.id])
 
         // Only return Location for Detail Page
-        if(req.params.id) {
+        if (req.params.id) {
           const locations = await query_select(con, sql_location, [plant.id])
-          result.push({...plant, benefits, nutritions, locations})
+          result.push({
+            ...plant,
+            benefits,
+            nutritions,
+            locations
+          })
         } else {
-          result.push({...plant, benefits, nutritions})
+          result.push({
+            ...plant,
+            benefits,
+            nutritions
+          })
         }
       }
     } catch (error) {
@@ -51,7 +60,25 @@ const index = (req, res) => {
   });
 }
 
+const predict = (req, res) => {
+  var xhr = new XMLHttpRequest();
+  var url = "http://127.0.0.1:8501/v1/models/digits_model:predict";
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var json = JSON.parse(xhr.responseText);
+      console.log(json.email + ", " + json.password);
+    }
+  };
+  var data = JSON.stringify({
+    "email": "hey@mail.com",
+    "password": "101010"
+  });
+  xhr.send(data);
+}
+
 //Export All Methods
 module.exports = {
-  index,
+  index
 };
