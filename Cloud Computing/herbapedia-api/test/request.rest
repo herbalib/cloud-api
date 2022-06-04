@@ -3,6 +3,10 @@ GET http://localhost:3000/plants
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
+GET http://localhost:3000/locations/plants/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
+
+###
 POST http://localhost:3000/auth/login
 Content-Type: application/json
 
