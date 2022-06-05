@@ -79,8 +79,8 @@ const predict = async (req, res) => {
       try {
         // Import the Model (Through file or local API)
         const model = await tf.loadLayersModel('file://src/model/model.json')
+        console.log(model.summary());
         // const model = await tf.loadLayersModel('http://localhost:23450/model/model.json')
-        // console.log(model.summary());
 
         // Predict the File
         // const prediction = model.predict(tensor_3d_original)
