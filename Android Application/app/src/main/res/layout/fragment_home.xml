@@ -111,11 +111,32 @@
             android:layout_height="match_parent"
             android:paddingLeft="32dp"
             android:paddingTop="64dp"
-            android:paddingRight="32dp">
+            android:paddingRight="32dp"
+            android:paddingBottom="32dp">
 
-            <include
-                android:id="@+id/home_plant"
-                layout="@layout/item_plant" />
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scrollbars="none"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="32dp">
+
+                    <include
+                        android:id="@+id/home_plant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        layout="@layout/item_plant"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

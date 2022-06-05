@@ -4,42 +4,42 @@ import com.google.gson.annotations.SerializedName
 
 data class PlantResponse(
 	@field:SerializedName("error")
-	val error: String? = null,
+	val error: String,
 
 	@field:SerializedName("success")
-	val success: String? = null,
+	val success: String,
 
 	@field:SerializedName("plants")
-	val plants: List<PlantsItem?>? = null
+	val plants: List<PlantsItem>
 )
 
 data class PlantsItem(
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	val name: String,
 
 	@field:SerializedName("latin_name")
-	val latinName: String? = null,
+	val latinName: String,
 
 	@field:SerializedName("description")
-	val description: String? = null,
+	val description: String,
 
 	@field:SerializedName("consumption")
-	val consumption: String? = null,
+	val consumption: String,
 
 	@field:SerializedName("image")
-	val image: String? = null,
+	val image: String,
 
 	@field:SerializedName("ref")
-	val ref: String? = null,
+	val ref: String,
 
 	@field:SerializedName("benefits")
-	val benefits: List<BenefitsItem?>? = null,
+	val benefits: List<BenefitsItem>,
 
 	@field:SerializedName("nutritions")
-	val nutritions: List<NutritionsItem?>? = null,
+	val nutritions: List<NutritionsItem>,
 
 	@field:SerializedName("locations")
 	val locations: List<LocationsItem?>? = null
@@ -47,24 +47,24 @@ data class PlantsItem(
 
 data class BenefitsItem(
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	val name: String,
 
 	@field:SerializedName("plant_id")
-	val plantId: Int? = null,
+	val plantId: Int
 )
 
 data class NutritionsItem(
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	val name: String,
 
 	@field:SerializedName("plant_id")
-	val plantId: Int? = null
+	val plantId: Int
 )
 
 data class LocationsItem(

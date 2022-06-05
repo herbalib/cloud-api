@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rickyandrean.herbapedia.model.LoginRequest
 import com.rickyandrean.herbapedia.model.PlantResponse
+import com.rickyandrean.herbapedia.model.PlantsItem
 import com.rickyandrean.herbapedia.network.ApiConfig
 import com.rickyandrean.herbapedia.ui.main.MainActivity
 import retrofit2.Call
@@ -14,17 +15,19 @@ import retrofit2.Response
 
 class HomeViewModel : ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
-    private val _plant = MutableLiveData<Boolean>()
+    private val _plant = MutableLiveData<PlantResponse>()
     val loading: LiveData<Boolean> = _loading
-    val plant: LiveData<Boolean> = _plant
+    val plant: LiveData<PlantResponse> = _plant
+
+    val plantSelected: MutableLiveData<PlantsItem> = MutableLiveData<PlantsItem>()
+    val finish: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
     init {
+        finish.value = false
         loadPlant()
     }
 
     private fun loadPlant(){
-        // Log.d(TAG,"Bearer ${MainActivity.token}")
-
         val client = ApiConfig.getApiService().plants("application/json", "Bearer ${MainActivity.token}")
         client.enqueue(object: Callback<PlantResponse> {
             override fun onResponse(call: Call<PlantResponse>, response: Response<PlantResponse>) {
@@ -32,17 +35,17 @@ class HomeViewModel : ViewModel() {
 
                 if (response.isSuccessful) {
                     if (responseBody.error == "") {
-                        Log.d(TAG, response.body()!!.toString())
+                        _plant.value = responseBody
                     } else {
-                        Log.d(TAG, responseBody.error.toString())
+                        Log.d(TAG, responseBody.error)
                     }
                 } else {
-                    Log.d(TAG, "Error occured!")
+                    Log.d(TAG, "Error occurred!")
                 }
             }
 
             override fun onFailure(call: Call<PlantResponse>, t: Throwable) {
-                Log.e(TAG, "Error occured!")
+                Log.e(TAG, "Error occurred!")
             }
         })
     }
