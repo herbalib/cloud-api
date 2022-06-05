@@ -10,6 +10,7 @@ const register = (req, res) => {
     if (query_err) return res.status(500).send(query_err)
     if(query_res.length != 0) return res.status(500).send('Email Already Exists')
 
+    console.log('The password is ' + req.body.password)
     // Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 160419078)
 
