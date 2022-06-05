@@ -1,5 +1,5 @@
 # GET http://localhost:23450/plants?keyword=sam
-GET http://localhost:23450/plants
+GET https://herbapedia-umpbwdfpnq-as.a.run.app/plants
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:23450/plants/predict
+POST https://herbapedia-umpbwdfpnq-as.a.run.app/plants/predict
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 Content-Type: multipart/form-data; boundary=---------------------------9051914041544843365972754266
 
