@@ -1,9 +1,9 @@
 # GET http://localhost:23450/plants?keyword=sam
-GET http://localhost:23450/plants
+GET http://localhost:23450/plants/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
-GET http://localhost:23450/locations/plants/1
+GET http://localhost:23450/locations/plants
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
@@ -12,16 +12,16 @@ Content-Type: application/json
 
 {
     "email":"ivan@gmail.com",
-    "password":"pass"
+    "password":"passs"
 }
 ###
 POST http://localhost:23450/auth/register
 Content-Type: application/json
 
 {
-    "name":"kukira",
-    "email":"kukira@gmail.com",
-    "password":"kukira"
+    "name":"heykam",
+    "email":"heykam@gmail.com",
+    "password":"heykam"
 }
 
 ###

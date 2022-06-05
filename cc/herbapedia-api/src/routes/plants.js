@@ -10,6 +10,7 @@ const multer = require('multer');
 const upload = multer()
 
 router.get("/", middleware_user, plants.index)
+router.get("/:id", middleware_user, plants.index)
 router.post("/predict", [middleware_user, upload.single('image')], plants.predict)
 
 module.exports = router;
