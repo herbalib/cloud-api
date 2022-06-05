@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.rickyandrean.herbapedia.model.RegisterRequest
 import com.rickyandrean.herbapedia.model.RegisterResponse
 import com.rickyandrean.herbapedia.network.ApiConfig
+import com.rickyandrean.herbapedia.ui.login.LoginViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RegisterViewModel: ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
-
     val loading: LiveData<Boolean> = _loading
 
     init {
@@ -29,15 +29,19 @@ class RegisterViewModel: ViewModel() {
                 _loading.value = false
 
                 if(response.isSuccessful) {
-                    Log.d(TAG, response.body()!!.success)
+                    if (response.body()!!.error == "") {
+                        Log.d(TAG, response.body()!!.success)
+                    } else {
+                        Log.d(TAG, response.body()!!.error)
+                    }
                 } else {
-                    Log.e(TAG, response.body()!!.error)
+                    Log.e(TAG, "Error occured!")
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 _loading.value = false
-                Log.e(TAG, t.message.toString())
+                Log.e(TAG, "Error occured!")
             }
         })
     }

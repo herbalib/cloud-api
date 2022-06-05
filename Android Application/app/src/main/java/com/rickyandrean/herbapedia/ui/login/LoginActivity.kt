@@ -1,30 +1,37 @@
 package com.rickyandrean.herbapedia.ui.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
-import com.loopj.android.http.AsyncHttpClient
-import com.loopj.android.http.AsyncHttpResponseHandler
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.rickyandrean.herbapedia.databinding.ActivityLoginBinding
+import com.rickyandrean.herbapedia.helper.ViewModelFactory
+import com.rickyandrean.herbapedia.storage.AuthenticationPreference
 import com.rickyandrean.herbapedia.ui.main.MainActivity
 import com.rickyandrean.herbapedia.ui.onboarding.OnboardingActivity
 import com.rickyandrean.herbapedia.ui.register.RegisterActivity
-import cz.msebera.android.httpclient.Header
-import cz.msebera.android.httpclient.entity.StringEntity
-import org.json.JSONObject
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "authentication")
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private val loginViewModel: LoginViewModel by viewModels()
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        loginViewModel = ViewModelProvider(
+            this@LoginActivity,
+            ViewModelFactory.getInstance(AuthenticationPreference.getInstance(dataStore))
+        )[LoginViewModel::class.java]
 
         setupView()
 
@@ -43,11 +50,15 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             loginViewModel.login(binding.tiLoginEmail.editText?.text.toString(), binding.tiPassword.editText?.text.toString())
+        }
 
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//            startActivity(intent)
-//            finish()
+        loginViewModel.loginAccess.observe(this) {
+            if (it) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 

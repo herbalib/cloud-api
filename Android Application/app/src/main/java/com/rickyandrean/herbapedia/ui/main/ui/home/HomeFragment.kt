@@ -6,7 +6,9 @@ import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -14,9 +16,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.FragmentHomeBinding
 import com.rickyandrean.herbapedia.ui.main.MainActivity
+import com.rickyandrean.herbapedia.ui.register.RegisterViewModel
 import com.rickyandrean.herbapedia.ui.scan.ScanActivity
 
 class HomeFragment : Fragment(), View.OnFocusChangeListener {
+    private val homeViewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -25,7 +29,6 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,6 +48,10 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
         binding.cvHomeScan.setOnClickListener {
             val intent = Intent(requireActivity(), ScanActivity::class.java)
             startActivity(intent)
+        }
+
+        homeViewModel.plant.observe(viewLifecycleOwner) {
+
         }
     }
 

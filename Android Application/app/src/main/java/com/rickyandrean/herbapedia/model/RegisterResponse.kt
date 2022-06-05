@@ -6,6 +6,6 @@ data class RegisterResponse(
 	@field:SerializedName("error")
 	val error: String,
 
-	@field:SerializedName("error")
+	@field:SerializedName("success")
 	val success: String
 )

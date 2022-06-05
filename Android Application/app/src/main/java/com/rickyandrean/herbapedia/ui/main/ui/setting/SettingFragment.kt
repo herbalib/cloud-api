@@ -7,9 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.rickyandrean.herbapedia.databinding.FragmentSettingBinding
-import com.rickyandrean.herbapedia.ui.main.MainActivity
 import com.rickyandrean.herbapedia.ui.onboarding.OnboardingActivity
 
 class SettingFragment : Fragment() {
@@ -21,7 +19,6 @@ class SettingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel = ViewModelProvider(this).get(SettingViewModel::class.java)
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         return binding.root
     }
