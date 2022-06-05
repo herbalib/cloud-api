@@ -10,6 +10,7 @@ import com.rickyandrean.herbapedia.model.LoginRequest
 import com.rickyandrean.herbapedia.model.LoginResponse
 import com.rickyandrean.herbapedia.network.ApiConfig
 import com.rickyandrean.herbapedia.storage.AuthenticationPreference
+import com.rickyandrean.herbapedia.ui.main.MainActivity
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,7 +41,6 @@ class LoginViewModel(private val preference: AuthenticationPreference): ViewMode
                     if (responseBody.error == "") {
                         Log.d(TAG, responseBody.success)
 
-                        // Login berhasil
                         viewModelScope.launch {
                             preference.login(
                                 Authentication(
@@ -50,6 +50,7 @@ class LoginViewModel(private val preference: AuthenticationPreference): ViewMode
                             )
                         }
 
+                        MainActivity.token = responseBody.accessToken.toString()
                         _loginAccess.value = true
                     } else {
                         Log.d(TAG, responseBody.error)

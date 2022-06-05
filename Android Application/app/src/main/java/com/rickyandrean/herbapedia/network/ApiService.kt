@@ -1,9 +1,6 @@
 package com.rickyandrean.herbapedia.network
 
-import com.rickyandrean.herbapedia.model.LoginRequest
-import com.rickyandrean.herbapedia.model.LoginResponse
-import com.rickyandrean.herbapedia.model.RegisterRequest
-import com.rickyandrean.herbapedia.model.RegisterResponse
+import com.rickyandrean.herbapedia.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -15,16 +12,15 @@ interface ApiService {
         @Body loginRequest: LoginRequest
     ): Call<LoginResponse>
 
-
     @POST("auth/register")
     fun register(
         @Header("Content-Type") type: String,
         @Body registerRequest: RegisterRequest
     ): Call<RegisterResponse>
 
-    @GET("auth/plants")
+    @GET("plants")
     fun plants(
         @Header("Content-Type") type: String,
         @Header("Authorization") token: String
-    ): Call<RegisterResponse>
+    ): Call<PlantResponse>
 }

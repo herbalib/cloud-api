@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rickyandrean.herbapedia.storage.AuthenticationPreference
 import com.rickyandrean.herbapedia.ui.login.LoginViewModel
-import com.rickyandrean.herbapedia.ui.main.MainViewModel
-import com.rickyandrean.herbapedia.ui.onboarding.OnboardingViewModel
+import com.rickyandrean.herbapedia.ui.splash.SplashViewModel
 
 class ViewModelFactory(private val pref: AuthenticationPreference) :
     ViewModelProvider.NewInstanceFactory() {
@@ -13,8 +12,7 @@ class ViewModelFactory(private val pref: AuthenticationPreference) :
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(pref) as T
-            modelClass.isAssignableFrom(OnboardingViewModel::class.java) -> OnboardingViewModel(pref) as T
-            modelClass.isAssignableFrom(MainViewModel::class.java) -> MainViewModel(pref) as T
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> SplashViewModel(pref) as T
             else -> throw IllegalArgumentException("Unknown ViewModel: " + modelClass.name)
         }
     }
