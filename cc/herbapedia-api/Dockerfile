@@ -2,13 +2,13 @@ FROM node:18.2.0
 
 WORKDIR /api
 
-COPY 'Cloud Computing/herbapedia-api/package*.json' ./
+COPY cc/herbapedia-api/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY cc/herbapedia-api/ .
 
-ENV PORT 443
+ENV PORT 23450
 
 EXPOSE 23450
 
