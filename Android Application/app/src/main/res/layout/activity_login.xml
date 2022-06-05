@@ -50,7 +50,7 @@
                 tools:ignore="TextContrastCheck" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ti_full_name"
+                android:id="@+id/ti_login_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_email_username"
+                    android:hint="@string/hint_email"
                     android:padding="15dp"
                     android:singleLine="true"
                     android:textSize="16sp" />
@@ -100,7 +100,7 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ti_full_name"
+                app:layout_constraintTop_toBottomOf="@+id/ti_login_email"
                 app:startIconDrawable="@drawable/icon_password"
                 app:startIconTint="@color/sacramento">
 
