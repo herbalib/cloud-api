@@ -5,12 +5,11 @@ require("dotenv").config();
 
 // Register
 const register = (req, res) => {
+  return res.send('Hi Everyone')
   con.query("SELECT * FROM users WHERE email = ?",[req.body.email], async (query_err, query_res) => {
     // Return if Error or Email Exists
     if (query_err) return res.status(500).send(query_err)
     if(query_res.length != 0) return res.status(500).send('Email Already Exists')
-
-    console.log('The password is ' + req.body.password)
     // Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 160419078)
 
@@ -29,9 +28,13 @@ const register = (req, res) => {
 
 // Login
 const login = (req, res) => {
+  console.log('The body is ' + req.body)
+  console.log('The email is  ' + req.body.email)
+  console.log('The pwd is  ' + req.body.password)
+  return res.json(req.body)
     // Get data from body
-  con.query("SELECT * FROM users WHERE email = ?",[req.body.email], async (query_err, query_res) => {
 
+  con.query("SELECT * FROM users WHERE email = ?",[req.body.email], async (query_err, query_res) => {
     if (query_err) return res.status(500).send(query_err)
     if(query_res.length == 0) return res.status(500).send('Incorrect Email or Password')
 
