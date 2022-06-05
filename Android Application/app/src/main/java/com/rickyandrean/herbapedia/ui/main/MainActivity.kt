@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
@@ -14,7 +15,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.ActivityMainBinding
 import com.rickyandrean.herbapedia.ui.main.ui.home.HomeFragment
-import com.rickyandrean.herbapedia.ui.main.ui.maps.MapsFragment
+import com.rickyandrean.herbapedia.ui.main.ui.setting.SettingFragment
 import com.rickyandrean.herbapedia.ui.main.ui.plants.PlantsFragment
 import com.rickyandrean.herbapedia.ui.maps.MapsActivity
 
@@ -65,12 +66,12 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                         )
                         updateStack(0)
                     }
-                    is MapsFragment -> {
+                    is SettingFragment -> {
                         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
                         val navController = navHostFragment.navController
 
                         navController.navigate(
-                            R.id.action_navigation_maps_to_navigation_home,
+                            R.id.action_navigation_setting_to_navigation_home,
                             null,
                             null
                         )
@@ -93,12 +94,12 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                         )
                         updateStack(1)
                     }
-                    is MapsFragment -> {
+                    is SettingFragment -> {
                         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
                         val navController = navHostFragment.navController
 
                         navController.navigate(
-                            R.id.action_navigation_maps_to_navigation_plants,
+                            R.id.action_navigation_setting_to_navigation_plants,
                             null,
                             null
                         )
@@ -106,16 +107,18 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                     }
                 }
             }
-            R.id.navigation_maps -> {
+            R.id.navigation_setting -> {
                 when (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)!!.childFragmentManager.fragments[0]) {
                     is HomeFragment -> {
                         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
                         val navController = navHostFragment.navController
+                        val extras = FragmentNavigatorExtras(findViewById<View>(R.id.cv_home) to "setting")
 
                         navController.navigate(
-                            R.id.action_navigation_home_to_navigation_maps,
+                            R.id.action_navigation_home_to_navigation_setting,
                             null,
-                            null
+                            null,
+                            extras
                         )
                         updateStack(2)
                     }
@@ -124,7 +127,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                         val navController = navHostFragment.navController
 
                         navController.navigate(
-                            R.id.action_navigation_plants_to_navigation_maps,
+                            R.id.action_navigation_plants_to_navigation_setting,
                             null,
                             null
                         )

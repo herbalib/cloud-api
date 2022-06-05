@@ -31,7 +31,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_plants">Plants</string>
-    <string name="title_maps">Maps</string>
+    <string name="title_setting">Setting</string>
     <string name="icon_setting">Icon Setting</string>
     <string name="greeting_header">Hi, Theophil</string>
     <string name="greeting_subheader">have a great day!</string>
@@ -51,4 +51,5 @@
     <string name="plant_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus leo et ultrices tempus. Vestibulum in ex gravida, lacinia risus nec, bibendum sem.</string>
     <string name="process">HOW TO PROCESS</string>
     <string name="process_content">How to process content</string>
+    <string name="logout">Logout</string>
 </resources>

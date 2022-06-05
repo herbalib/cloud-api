@@ -1,6 +1,7 @@
 package com.rickyandrean.herbapedia.ui.main.ui.plants
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -18,6 +19,7 @@ import com.rickyandrean.herbapedia.adapter.PlantAdapter
 import com.rickyandrean.herbapedia.databinding.FragmentPlantsBinding
 import com.rickyandrean.herbapedia.model.Plant
 import com.rickyandrean.herbapedia.ui.main.MainActivity
+import com.rickyandrean.herbapedia.ui.scan.ScanActivity
 
 class PlantsFragment : Fragment() {
     private var _binding: FragmentPlantsBinding? = null
@@ -58,6 +60,11 @@ class PlantsFragment : Fragment() {
         binding.rvPlants.setHasFixedSize(true)
         binding.rvPlants.layoutManager = LinearLayoutManager(requireContext())
         binding.rvPlants.adapter = PlantAdapter(plants)
+
+        binding.cvPlantsScan.setOnClickListener {
+            val intent = Intent(requireActivity(), ScanActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {

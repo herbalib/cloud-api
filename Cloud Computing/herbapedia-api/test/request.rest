@@ -1,13 +1,13 @@
-# GET http://localhost:3000/plants?keyword=sam
-GET http://localhost:3000/plants
+# GET http://localhost:23450/plants?keyword=sam
+GET http://localhost:23450/plants
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
-GET http://localhost:3000/locations/plants/1
+GET http://localhost:23450/locations/plants/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
-POST http://localhost:3000/auth/login
+POST http://localhost:23450/auth/login
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
     "password":"pass"
 }
 ###
-POST http://localhost:3000/auth/register
+POST http://localhost:23450/auth/register
 Content-Type: application/json
 
 {
@@ -25,4 +25,29 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/logout
+GET http://localhost:23450/logout
+
+###
+http://localhost:23450/locations
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
+
+###
+POST http://localhost:8501/v1/models/img_classifier:predict
+Content-Type: application/json
+
+{
+    "signature_name": "serving_default", 
+    "instances": ""
+}
+
+###
+POST http://localhost:23450/plants/predict
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
+Content-Type: multipart/form-data; boundary=---------------------------9051914041544843365972754266
+
+-----------------------------9051914041544843365972754266
+Content-Disposition: form-data; name="image"; filename="mnist.png"
+Content-Type: image/jpeg
+
+< ./mnist.png
+-----------------------------9051914041544843365972754266--

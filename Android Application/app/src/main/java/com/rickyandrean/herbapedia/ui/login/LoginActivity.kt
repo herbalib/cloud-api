@@ -1,9 +1,7 @@
 package com.rickyandrean.herbapedia.ui.login
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityOptionsCompat
@@ -11,7 +9,6 @@ import com.rickyandrean.herbapedia.databinding.ActivityLoginBinding
 import com.rickyandrean.herbapedia.ui.main.MainActivity
 import com.rickyandrean.herbapedia.ui.onboarding.OnboardingActivity
 import com.rickyandrean.herbapedia.ui.register.RegisterActivity
-
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -38,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
             finish()
         }

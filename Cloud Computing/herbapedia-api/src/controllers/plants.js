@@ -4,6 +4,11 @@ const {
   query_select
 } = require("../config/database.js");
 
+// Library Prediction
+// To Disable Warning : TF_CPP_MIN_LOG_LEVEL=3
+const tf = require('@tensorflow/tfjs-node');
+var Jimp = require('jimp');
+
 // To get All Plants, Search Plants, Detail Plants
 const index = (req, res) => {
   var result = []
@@ -60,25 +65,39 @@ const index = (req, res) => {
   });
 }
 
-const predict = (req, res) => {
-  var xhr = new XMLHttpRequest();
-  var url = "http://127.0.0.1:8501/v1/models/digits_model:predict";
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      var json = JSON.parse(xhr.responseText);
-      console.log(json.email + ", " + json.password);
-    }
-  };
-  var data = JSON.stringify({
-    "email": "hey@mail.com",
-    "password": "101010"
-  });
-  xhr.send(data);
+const predict = async (req, res) => {
+  await Jimp.read(req.file.buffer)
+    .then(async image => {
+      // For Image Visualization
+      // tensor_3d_original = tf.tensor(image.bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose([0, 2, 1]);
+      // tensor_3d_flat = tensor_3d_original.clone().reshape([3, -1])
+      
+      // For Prediction
+      tensor_3d_original = tf.tensor(image.resize(384,384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose().reshape([image.bitmap.height, image.bitmap.width, -1]);
+      console.log('Input Shape ' + tensor_3d_original.shape)
+
+      try {
+        // Import the Model (Through file or local API)
+        const model = await tf.loadLayersModel('file://src/model/model.json')
+        // const model = await tf.loadLayersModel('http://localhost:23450/model/model.json')
+        // console.log(model.summary());
+
+        // Predict the File
+        // const prediction = model.predict(tensor_3d_original)
+        res.send("Success")
+      } catch (err) {
+        console.log(err)
+        res.status(500).send(err)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send(err)
+    });
 }
 
 //Export All Methods
 module.exports = {
-  index
+  index,
+  predict
 };

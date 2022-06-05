@@ -13,3 +13,5 @@ npm run devStart
 Create a test file:
 1. Create file `request.rest`
 2. Add extenstion REST Client
+
+Use JIMP to image JS
