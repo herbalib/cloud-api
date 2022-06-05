@@ -11,9 +11,16 @@ const index = async (req, res) => {
                               FROM locations l 
                               INNER JOIN plants p ON p.id = l.plant_id`
         const locations = await query_select(con, sql_location, [])
-        return res.send(locations)
-    } catch (error) {
-        return res.status(500).send(error);
+        return res.json({
+            error: '',
+            success: 'Find Plants Locations Success',
+            locations
+        })
+    } catch (catch_err) {
+        return res.json({
+            error: catch_err,
+            success: ''
+        });
     }
 }
 
@@ -25,9 +32,16 @@ const show = async (req, res) => {
                               INNER JOIN plants p ON p.id = l.plant_id
                               WHERE l.plant_id = ?`
         const locations = await query_select(con, sql_location, [req.params.plant_id])
-        return res.send(locations)
-    } catch (error) {
-        return res.status(500).send(error);
+        return res.json({
+            error: '',
+            success: 'Find Plant Locations Success',
+            locations
+        })
+    } catch (catch_err) {
+        return res.json({
+            error: catch_err,
+            success: ''
+        });
     }
 }
 

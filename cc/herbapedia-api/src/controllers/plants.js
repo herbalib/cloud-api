@@ -11,7 +11,7 @@ var Jimp = require('jimp');
 
 // To get All Plants, Search Plants, Detail Plants
 const index = (req, res) => {
-  var result = []
+  var plants = []
 
   // Main SQL Plant Query
   var sql_plant = 'SELECT id, name, latin_name, description, consumption, image, ref FROM plants'
@@ -33,7 +33,10 @@ const index = (req, res) => {
   const sql_location = "SELECT id, lat, lon, description, plant_id FROM locations WHERE plant_id = ?"
 
   con.query(sql_plant, query_params, async (query_err, query_res) => {
-    if (query_err) return res.status(500).send(query_err);
+    if (query_err) return res.status(200).json({
+      error: query_err,
+      success: ''
+    });
     try {
       // Add Benefits and Nutritions to Plant Rows, and optionally Location for Detail Page
       for (const plant of query_res) {
@@ -43,24 +46,24 @@ const index = (req, res) => {
         // Only return Location for Detail Page
         if (req.params.id) {
           const locations = await query_select(con, sql_location, [plant.id])
-          result.push({
+          plants.push({
             ...plant,
             benefits,
             nutritions,
             locations
           })
         } else {
-          result.push({
+          plants.push({
             ...plant,
             benefits,
             nutritions
           })
         }
       }
-    } catch (error) {
-      return res.status(500).send(error);
+    } catch (catch_err) {
+      return res.json({error: catch_err, success: ''});
     } finally {
-      return res.json(result);
+      return res.json({error: '', success: 'Get Plant Success', plants});
     }
   });
 }
@@ -71,9 +74,9 @@ const predict = async (req, res) => {
       // For Image Visualization
       // tensor_3d_original = tf.tensor(image.bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose([0, 2, 1]);
       // tensor_3d_flat = tensor_3d_original.clone().reshape([3, -1])
-      
+
       // For Prediction
-      tensor_3d_original = tf.tensor(image.resize(384,384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose().reshape([image.bitmap.height, image.bitmap.width, -1]);
+      tensor_3d_original = tf.tensor(image.resize(384, 384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose().reshape([image.bitmap.height, image.bitmap.width, -1]);
       console.log('Input Shape ' + tensor_3d_original.shape)
 
       try {
@@ -84,15 +87,14 @@ const predict = async (req, res) => {
 
         // Predict the File
         // const prediction = model.predict(tensor_3d_original)
-        res.send("Success")
-      } catch (err) {
-        console.log(err)
-        res.status(500).send(err)
+        res.json({error: '', success: 'Predict Plant Data Success'});
+      } catch (catch_err) {
+        console.log(catch_err)
+        res.json({error: catch_err, success: ''});
       }
     })
-    .catch(err => {
-      console.log(err)
-      res.status(500).send(err)
+    .catch(catch_err => {
+      res.json({error: catch_err, success: ''});
     });
 }
 

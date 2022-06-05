@@ -9,8 +9,15 @@ require("dotenv").config();
 const register = (req, res) => {
   con.query("SELECT * FROM users WHERE email = ?", [req.body.email], async (query_err, query_res) => {
     // Return if Error or Email Exists
-    if (query_err) return res.status(500).send(query_err)
-    if (query_res.length != 0) return res.status(500).send('Email Already Exists')
+    if (query_err) return res.json({
+      error: 'Select Existing User Failed',
+      success: ''
+    })
+    else if (query_res.length != 0) return res.json({
+      error: 'Email Already Exists',
+      success: ''
+    })
+
     // Hash password
     const hashedPassword = await bcrypt.hash(req.body.password, 160419078)
 
@@ -20,9 +27,18 @@ const register = (req, res) => {
       "INSERT INTO users(name, email, password) VALUES(?,?,?)",
       [req.body.name, req.body.email, hashedPassword],
       function (query_err, query_res) {
-        if (query_err) return res.status(500).send(query_err)
-        else if (query_res.affectedRows <= 0) return res.status(500).send("No Affected Rows")
-        else return res.status(200).send('Registration Success')
+        if (query_err) return res.json({
+          error: 'Query Insert User Failed',
+          success: ''
+        })
+        else if (query_res.affectedRows <= 0) return res.json({
+          error: 'Insert User Failed',
+          success: ''
+        })
+        else return res.json({
+          error: '',
+          success: 'Registration Success'
+        })
       })
   })
 }
@@ -31,10 +47,14 @@ const register = (req, res) => {
 const login = (req, res) => {
   // Get data from body
   con.query("SELECT * FROM users WHERE email = ?", [req.body.email], async (query_err, query_res) => {
-
-
-    if (query_err) return res.status(500).send(query_err)
-    if (query_res.length == 0) return res.status(500).send('Incorrect Email or Password')
+    if (query_err) return res.json({
+      error: 'Finding User Information Failed',
+      success: ''
+    })
+    else if (query_res.length == 0) return res.json({
+      error: 'Incorrect Email or Password',
+      success: ''
+    })
 
     // Get Password 
     db_name = query_res[0].name
@@ -54,15 +74,26 @@ const login = (req, res) => {
         "UPDATE users SET token = ? WHERE email = ?",
         [accessToken, req.body.email],
         function (query_err, query_res) {
-          if (query_err) return res.status(500).send(query_err)
-          else if (query_res.affectedRows <= 0) return res.status(500).send("No Affected Rows")
-          else return res.status(200).json({
+          if (query_err) return res.json({
+            error: "Update Token Failed",
+            success: ''
+          })
+          else if (query_res.affectedRows <= 0) return res.json({
+            error: "No User Token Affected",
+            success: ''
+          })
+          else return res.json({
+            error: '',
+            success: 'Login Success',
             name: db_name,
             accessToken: accessToken
           })
         })
     } else {
-      return res.status(500).send('Incorrect Email or Password')
+      return res.json({
+        error: 'Incorrect Email or Password',
+        success: ''
+      })
     }
   })
 }
