@@ -1,0 +1,109 @@
+benefit_id,name,plant_id
+1,Digunakan untuk mengurangi rasa sakit akibat gigitan ular dan serangga.,1
+2,Dikombinasikan dengan kumis kucing untuk penyembuhan kencing manis.,1
+3,"Rebusannya dapat mengatasi demam, gatal kulit, desentri, tifus, kolera, gangguan saluran nafas, bengkak kaki, vitiligo dan wasir.",1
+4,"Imunostimulan, Antipiretik, Antitusif",1
+5,Mengurangi ataupun mengeluarkan batu ginjal,2
+6,Meningkatkan empedu,2
+7,"Mengobati diare, magh, beri-beri, demam",2
+8,Mengatasi haid yang tidak teratur,2
+9,Mengobati batu ginjal,3
+10,Mencegah Hepatitis B,3
+11,Mengurangi Sel Kanker,3
+12,Menyembuhkan Encok,3
+13,Mencegah Berbagai Penyakit Kulit,3
+14,Menurunkan Tekanan Darah Tinggi,3
+15,"Mengobati Sariawan, Radang, dan Panas Dalam",3
+16,Memperkuat Imun Tubuh,3
+17,Sebagai obat kencing berdarah,4
+18,Mencegah keguguran serta darah haid yang terlalu banyak,4
+19,Sebagai obat disentri,4
+20,Sebagai obat wasir,4
+21,Menyembuhkan infeksi saluran kemih,5
+22,Mengobati gangguan ginjal,5
+23,Mengatasi rematik,5
+24,Meredakan batuk,5
+25,Mengobati gusi bengkak,5
+26,Mengontrol kadar gula darah,5
+27,Menurunkan tekanan darah tinggi,5
+28,Mengurangi rasa gatal karena alergi,5
+29,Membantu proses detoksifikasi,5
+30,Mempercepat penyembuhan luka dan mencegah infeksi,6
+31,Mencegah kanker,6
+32,Meningkatkan fungsi pembuluh darah,6
+33,Obat anti radang,6
+34,Mengatasi penyakit kulit,7
+35,Mencegah kanker,7
+36,Mengatasi rambut rontok,7
+37,Mengatasi rasa nyeri,7
+38,Mengatasi hipertensi,7
+39,Mengobati diare,7
+40,Mengatasi diabetes,7
+41,Mencegah gangguan stres,7
+42,Mengurangi resiko kanker,8
+43,Meningkatkan Sistem Pencernaan,8
+44,Mengatur Kolesterol,8
+45,Meredakan rasa nyeri,8
+46,Meningkatkan kadar sel darah merah,8
+47,Mencegah diabetes,9
+48,Mencegah penyakit kardiovaskular,9
+49,Mengurangi peradangan,9
+50,Menurunkan kolesterol,9
+51,Mengatasi disfungsi ereksi,9
+52,Menyehatkan mata,9
+53,Menyehatkan saluran pencernaan,10
+54,Menjaga kesehatan mulut dan gigi,10
+55,Mencegah kanker,10
+56,Membantu penyembuhan luka,10
+57,Mengobati mimisan,10
+58,Mengobati radang prostat,10
+59,Mencegah malaria,10
+60,Mengurangi depresi,10
+61,Mengobati batuk,10
+62,Memelihara kesehatan jantung,11
+63,Menjaga berat badan,11
+64,Menjaga kesehatan pencernaan,11
+65,Mencegah berbagai penyakit,11
+66,\Melancarkan pencernaan,12
+67,Mencegah sembelit,12
+68,Melancarkan buang air besar,12
+69,Mengatasi radang saluran napas,12
+70,Mengatasi keputihan pada wanita,12
+71,Menyembuhkan penyakit anemia,12
+72,Membantu mengatasi demam dan sakit kepala,13
+73,Meredakan diare,13
+74,Meningkatkan nafsu makan,13
+75,Membantu mengatasi stroke,13
+76,Meningkatkan daya tahan tubuh,13
+77,Menyembuhkan luka,13
+78,Mengobati demam berdarah,14
+79,Mencegah infeksi malaria,14
+80,Melancarkan Pencernaan,14
+81,Mencegah Kanker,14
+82,Meningkatkan sistem kekebalan tubuh,14
+83,Menurunkan resiko diabetes,14
+84,Membantu menurunkan berat badan,14
+85,Mengurangi sakit haid,14
+86,Menjaga kesehatan jantung,14
+87,Sebagai obat luka bakar,15
+88,Mengatasi penyakit maag,15
+89,Mengobati asam urat,15
+90,Mengatasi rasa gatal,15
+91,Mencegah resiko diabetes,15
+92,Mencegah penyaki jantung,15
+93,Mengobati hipertensi,15
+94,Mencegah penyakit jantung,15
+95,Mengobati anemia,15
+96,Mengatasi peradangan,16
+97,Menyembuhkan Flu,16
+98,Menyembuhkan sariawan,16
+99,Mengurangi stres,16
+100,Mengatasi gangguan pencernaan,17
+101,Meredakan sindrom iritasi usus besar,17
+102,Meningkatkan imunitas tubuh,17
+103,Membantu menurunkan berat badan,17
+104,Menjaga daya tahan tubuh,18
+105,Menjaga kesehatan pencernaan,18
+106,Menyembuhkan penyakit diare,18
+107,Mengendalikan kadar gula darah,18
+108,Mengurangi demam,18
