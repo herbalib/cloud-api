@@ -47,6 +47,7 @@ const register = (req, res) => {
 const login = (req, res) => {
   // Get data from body
   con.query("SELECT * FROM users WHERE email = ?", [req.body.email], async (query_err, query_res) => {
+    console.log("Email not exists lho, ada : " + query_res.length)
     if (query_err) return res.json({
       error: 'Finding User Information Failed',
       success: ''
@@ -61,7 +62,9 @@ const login = (req, res) => {
     db_pass = query_res[0].password
     db_role = query_res[0].role
 
+    console.log("Comparing " + req.body.password + "With" + db_pass)
     if (await bcrypt.compare(req.body.password, db_pass)) {
+      console.log("Good!")
       // Create JWT
       const payload = {
         email: req.body.email,
@@ -90,6 +93,7 @@ const login = (req, res) => {
           })
         })
     } else {
+      console.log("Bad!")
       return res.json({
         error: 'Incorrect Email or Password',
         success: ''
