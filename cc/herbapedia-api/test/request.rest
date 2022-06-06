@@ -51,3 +51,15 @@ Content-Type: image/jpeg
 
 < ./mnist.png
 -----------------------------9051914041544843365972754266--
+###
+POST http://localhost:23450/locations/plants
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
+Content-Type: application/json
+
+{
+    "lat":"-7.3112",
+    "lon":"112.791",
+    "description":"lokasi random",
+    "plant_id":"4"
+}
+###
