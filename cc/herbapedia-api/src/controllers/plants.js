@@ -103,11 +103,12 @@ const predict = async (req, res) => {
       // For Prediction
       tensor_3d_original = tf.tensor(image.resize(384, 384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose().reshape([image.bitmap.height, image.bitmap.width, -1]);
       console.log('Input Shape ' + tensor_3d_original.shape)
+      console.log('Data ' + tf.print(tensor_3d_original.shape))
 
       try {
         // Import the Model (Through file or local API)
         const model = await tf.loadLayersModel('file://src/model/model.json')
-        console.log(model.summary());
+        // console.log(model.summary());
         // const model = await tf.loadLayersModel('http://localhost:23450/model/model.json')
 
         // Predict the File
