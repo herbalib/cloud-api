@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/sv_bs_plant"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -52,6 +52,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/tv_bs_plant_latin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/inter"
+                    android:text="@string/plant_latin"
+                    android:textColor="@color/light_gray"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_name" />
+
                 <ImageView
                     android:id="@+id/iv_bs_plant_image"
                     android:layout_width="0dp"
@@ -63,7 +76,7 @@
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_latin"
                     app:srcCompat="@drawable/plant_image" />
 
                 <TextView
@@ -81,7 +94,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_bs_plant_image"
-                    app:lineHeight="20sp" />
+                    app:lineHeight="22sp" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv_bs_plant_content"
@@ -131,7 +144,8 @@
                             android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_nutrient_header" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_nutrient_header"
+                            app:lineHeight="24sp" />
 
                         <TextView
                             android:id="@+id/tv_bs_plant_cure_header"
@@ -162,7 +176,8 @@
                             android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_cure_header" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_cure_header"
+                            app:lineHeight="24sp" />
 
                         <TextView
                             android:id="@+id/tv_bs_plant_process_header"
@@ -193,10 +208,11 @@
                             android:textSize="14sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_process_header" />
+                            app:layout_constraintTop_toBottomOf="@+id/tv_bs_plant_process_header"
+                            app:lineHeight="24sp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

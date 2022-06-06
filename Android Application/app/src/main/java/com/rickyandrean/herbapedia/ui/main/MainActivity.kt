@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         setupView()
         stack.add(0)
 
+        Log.d("ASEDE", "$lat and $lon")
+
         binding.navView.setOnItemSelectedListener(this)
         binding.cvMapsMaps.setOnClickListener {
             startActivity(Intent(this, MapsActivity::class.java))
@@ -140,9 +142,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                         updateStack(2)
                     }
                 }
-
-                // Redirect ke MapsActivity
-                // OnBackPressed set juga supaya active navigation oke
             }
         }
 
@@ -184,5 +183,7 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         val stack = mutableListOf<Int>()
         var searchAnimation = false
         var token = "token"
+        var lat = "lat"
+        var lon = "lon"
     }
 }
