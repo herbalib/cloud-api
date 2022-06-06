@@ -1,6 +1,8 @@
 package com.rickyandrean.herbapedia.network
 
 import com.rickyandrean.herbapedia.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -45,4 +47,11 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body addLocationRequest: AddLocationRequest
     ): Call<AddLocationResponse>
+
+    @Multipart
+    @POST("plants/predict")
+    fun predictPlant(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part
+    ): Call<PredictPlantResponse>
 }
