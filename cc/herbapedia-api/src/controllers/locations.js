@@ -77,8 +77,29 @@ const show = async (req, res) => {
     }
 }
 
+const store = async (req, res) => {
+    con.query(
+        "INSERT INTO locations (lat, lon, description, plant_id) VALUES (?, ?, ?, ?)",
+        [req.body.lat, req.body.lon, req.body.description, req.body.plant_id],
+        function (query_err, query_res) {
+            if (query_err) return res.json({
+                error: 'Query Insert Location Failed',
+                success: ''
+            })
+            else if (query_res.affectedRows <= 0) return res.json({
+                error: 'Insert Location Failed',
+                success: ''
+            })
+            else return res.json({
+                error: '',
+                success: 'Insert Location Success'
+            })
+        })
+}
+
 //Export All Methods
 module.exports = {
     index,
-    show
+    show,
+    store
 };
