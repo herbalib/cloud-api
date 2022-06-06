@@ -31,12 +31,11 @@ const index = (req, res) => {
   const sql_benefit = "SELECT id, name, plant_id FROM benefits WHERE plant_id = ?"
   const sql_nutrition = "SELECT n.id, n.name, pn.plant_id FROM nutritions n INNER JOIN plants_nutritions pn ON pn.nutrition_id = n.id WHERE plant_id = ?"
   // Find location less than 5 km
-  const sql_location = `SELECT 
-                        id, 
+  const sql_location = `SELECT id, 
                         lat, 
                         lon, 
                         description, 
-                        plant_id 
+                        plant_id, 
                         (
                            6371 *
                            acos(cos(radians(?)) * 
@@ -48,7 +47,8 @@ const index = (req, res) => {
                         ) AS distance 
                         FROM locations 
                         WHERE plant_id = ?
-                        HAVING distance < 5`
+                        HAVING distance < 5
+                        ORDER BY distance DESC`
 
   con.query(sql_plant, query_params, async (query_err, query_res) => {
     if (query_err) return res.status(200).json({
@@ -79,9 +79,16 @@ const index = (req, res) => {
         }
       }
     } catch (catch_err) {
-      return res.json({error: catch_err, success: ''});
+      return res.json({
+        error: catch_err,
+        success: ''
+      });
     } finally {
-      return res.json({error: '', success: 'Get Plant Success', plants});
+      return res.json({
+        error: '',
+        success: 'Get Plant Success',
+        plants
+      });
     }
   });
 }
@@ -105,14 +112,23 @@ const predict = async (req, res) => {
 
         // Predict the File
         // const prediction = model.predict(tensor_3d_original)
-        res.json({error: '', success: 'Predict Plant Data Success'});
+        res.json({
+          error: '',
+          success: 'Predict Plant Data Success'
+        });
       } catch (catch_err) {
         console.log(catch_err)
-        res.json({error: catch_err, success: ''});
+        res.json({
+          error: catch_err,
+          success: ''
+        });
       }
     })
     .catch(catch_err => {
-      res.json({error: catch_err, success: ''});
+      res.json({
+        error: catch_err,
+        success: ''
+      });
     });
 }
 

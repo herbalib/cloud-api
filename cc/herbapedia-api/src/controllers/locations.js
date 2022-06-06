@@ -6,11 +6,27 @@ const {
 
 const index = async (req, res) => {
     try {
-        const sql_location = `SELECT l.id, l.lat, l.lon, l.description, l.plant_id, 
+        const sql_location = `SELECT 
+                              l.id, 
+                              l.lat, 
+                              l.lon, 
+                              l.description, 
+                              l.plant_id, 
+                              (
+                                 6371 *
+                                 acos(cos(radians(?)) * 
+                                 cos(radians(l.lat)) * 
+                                 cos(radians(l.lon) - 
+                                 radians(?)) + 
+                                 sin(radians(?)) * 
+                                 sin(radians(l.lat)))
+                              ) AS distance, 
                               p.name, p.image 
                               FROM locations l 
-                              INNER JOIN plants p ON p.id = l.plant_id`
-        const locations = await query_select(con, sql_location, [])
+                              INNER JOIN plants p ON p.id = l.plant_id
+                              HAVING distance < 5
+                              ORDER BY distance DESC`
+        const locations = await query_select(con, sql_location, [req.query.lat, req.query.lon, req.query.lat])
         return res.json({
             error: '',
             success: 'Find Plants Locations Success',
@@ -26,12 +42,28 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const sql_location = `SELECT l.id, l.lat, l.lon, l.description, l.plant_id, 
+        const sql_location = `SELECT 
+                              l.id, 
+                              l.lat, 
+                              l.lon, 
+                              l.description, 
+                              l.plant_id, 
+                              (
+                                6371 *
+                                acos(cos(radians(?)) * 
+                                cos(radians(l.lat)) * 
+                                cos(radians(l.lon) - 
+                                radians(?)) + 
+                                sin(radians(?)) * 
+                                sin(radians(l.lat)))
+                              ) AS distance, 
                               p.name, p.image 
-                              FROM locations l
+                              FROM locations l 
                               INNER JOIN plants p ON p.id = l.plant_id
-                              WHERE l.plant_id = ?`
-        const locations = await query_select(con, sql_location, [req.params.plant_id])
+                              WHERE l.plant_id = ?
+                              HAVING distance < 5
+                              ORDER BY distance DESC`
+        const locations = await query_select(con, sql_location, [req.query.lat, req.query.lon, req.query.lat, req.params.plant_id])
         return res.json({
             error: '',
             success: 'Find Plant Locations Success',

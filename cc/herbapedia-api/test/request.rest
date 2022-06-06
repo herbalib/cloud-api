@@ -1,5 +1,5 @@
 # GET http://localhost:23450/plants?keyword=sam
-GET http://localhost:23450/plants/1
+GET http://localhost:23450/plants/1?lat=-7.28589&lon=112.781
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
@@ -28,7 +28,7 @@ Content-Type: application/json
 GET http://localhost:23450/logout
 
 ###
-http://localhost:23450/locations
+http://localhost:23450/locations/plants?lat=-7.28589&lon=112.781
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Iml2YW5AZ21haWwuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU0MjgxMTI2fQ.wJdDWjHUbIkzwVkT44XPVnTOdPlpZmx_8P9fLYyMqD0
 
 ###
