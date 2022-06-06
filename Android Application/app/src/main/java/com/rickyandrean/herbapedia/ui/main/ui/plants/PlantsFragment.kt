@@ -2,36 +2,31 @@ package com.rickyandrean.herbapedia.ui.main.ui.plants
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rickyandrean.herbapedia.adapter.PlantAdapter
 import com.rickyandrean.herbapedia.databinding.FragmentPlantsBinding
-import com.rickyandrean.herbapedia.model.Plant
+import com.rickyandrean.herbapedia.model.PlantsItem
 import com.rickyandrean.herbapedia.ui.main.MainActivity
 import com.rickyandrean.herbapedia.ui.scan.ScanActivity
 
 class PlantsFragment : Fragment() {
+    private val plantsViewModel: PlantsViewModel by viewModels()
     private var _binding: FragmentPlantsBinding? = null
     private val binding get() = _binding!!
-    private val plants = ArrayList<Plant>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel = ViewModelProvider(this).get(PlantsViewModel::class.java)
         _binding = FragmentPlantsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,18 +48,29 @@ class PlantsFragment : Fragment() {
             MainActivity.searchAnimation = false
         }
 
-        plants.add(Plant("Image", "Name", "Latin", "Nutrient List", "Cure List", "Description"))
-        plants.add(Plant("Image", "Name", "Latin", "Nutrient List", "Cure List", "Description"))
-        plants.add(Plant("Image", "Name", "Latin", "Nutrient List", "Cure List", "Description"))
+        plantsViewModel.plant.observe(viewLifecycleOwner) {
+            if (!plantsViewModel.finish.value!!) {
+                plantsViewModel.finish.value = true
+                updateScreen(it.plants)
+            }
+        }
 
-        binding.rvPlants.setHasFixedSize(true)
-        binding.rvPlants.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvPlants.adapter = PlantAdapter(plants)
+        binding.tiSearch.setEndIconOnClickListener {
+            val search = binding.tiSearch.editText?.text.toString()
+            plantsViewModel.finish.value = false
+            plantsViewModel.searchPlant(search)
+        }
 
         binding.cvPlantsScan.setOnClickListener {
             val intent = Intent(requireActivity(), ScanActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun updateScreen(plants: List<PlantsItem>) {
+        binding.rvPlants.setHasFixedSize(true)
+        binding.rvPlants.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvPlants.adapter = PlantAdapter(plants)
     }
 
     override fun onDestroyView() {

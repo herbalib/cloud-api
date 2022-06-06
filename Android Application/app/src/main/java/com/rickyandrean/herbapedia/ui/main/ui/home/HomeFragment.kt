@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.FragmentHomeBinding
 import com.rickyandrean.herbapedia.model.PlantsItem
+import com.rickyandrean.herbapedia.ui.detail.DetailActivity
 import com.rickyandrean.herbapedia.ui.main.MainActivity
 import com.rickyandrean.herbapedia.ui.scan.ScanActivity
 import java.util.Random
@@ -92,6 +93,12 @@ class HomeFragment : Fragment(), View.OnFocusChangeListener {
             }
         }
         binding.homePlant.tvCureContent.text = cure
+
+        binding.homePlant.btnReadMore.setOnClickListener {
+            val intent = Intent(requireActivity(), DetailActivity::class.java)
+            intent.putExtra(DetailActivity.ID, plant.id)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroyView() {
