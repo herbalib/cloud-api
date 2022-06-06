@@ -38,4 +38,11 @@ interface ApiService {
         @Header("Content-Type") type: String,
         @Header("Authorization") token: String
     ): Call<PlantResponse>
+
+    @POST("locations/plants")
+    fun addPlantLocation(
+        @Header("Content-Type") type: String,
+        @Header("Authorization") token: String,
+        @Body addLocationRequest: AddLocationRequest
+    ): Call<AddLocationResponse>
 }

@@ -2,17 +2,18 @@ package com.rickyandrean.herbapedia.ui.detail
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationManager
+import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.text.InputType
 import android.view.WindowInsets
 import android.view.WindowManager
+import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -22,16 +23,21 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.ActivityDetailBinding
 import com.rickyandrean.herbapedia.model.PlantsItem
 
-class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
+
+class DetailActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityDetailBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private var marker: Marker? = null
+    private var location: LatLng? = null
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +53,24 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
             val mapFragment = supportFragmentManager.findFragmentById(R.id.map_detail) as SupportMapFragment
             mapFragment.getMapAsync(this)
+        }
+
+        binding.fabAddPin.setOnClickListener {
+            val input = EditText(this)
+            input.inputType = InputType.TYPE_CLASS_TEXT
+
+            AlertDialog.Builder(this).apply {
+                setTitle(detailViewModel.plant.value?.plants?.get(0)?.name)
+                setView(input)
+                setPositiveButton("OK") { _, _ ->
+                    detailViewModel.addLocation(location!!, input.text.toString())
+                }
+                setNegativeButton("Cancel") {dialog, _ ->
+                    dialog.cancel()
+                }
+                create()
+                show()
+            }
         }
     }
 
@@ -100,9 +124,9 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        getMyLocation()
 
         with(mMap.uiSettings) {
-            isZoomControlsEnabled = true
             isCompassEnabled = true
             isMapToolbarEnabled = true
         }
@@ -116,8 +140,8 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
                     mMap.addMarker(
                         MarkerOptions()
                             .position(coordinate)
-                            //.title(story.name)
-                            .alpha(0.3F)
+                            //.title(detailViewModel.plant.value.plants[0].name)
+                            .alpha(0.7F)
                             //.snippet(story.description)
                     )?.tag = index
 
@@ -127,9 +151,72 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
             }
         }
+
+        mMap.setOnMapClickListener {
+            binding.fabAddPin.isEnabled = true
+            binding.fabAddPin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.sacramento))
+
+            marker?.remove()
+            marker = mMap.addMarker(
+                MarkerOptions()
+                    .position(it)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+            )
+            location = it
+        }
+
+        mMap.setOnMarkerClickListener(this)
+    }
+
+    override fun onMarkerClick(m: Marker): Boolean {
+        if (m.tag == null) {
+            binding.fabAddPin.isEnabled = false
+            binding.fabAddPin.backgroundTintList = ColorStateList.valueOf(resources.getColor(R.color.light_gray3))
+
+            marker?.remove()
+
+            return true
+        }
+
+        val index = m.tag.toString().toInt()
+
+        AlertDialog.Builder(this).apply {
+            setTitle(detailViewModel.plant.value?.plants?.get(0)?.name)
+            setMessage(detailViewModel.plant.value?.plants?.get(0)?.locations?.get(index)?.description)
+            setPositiveButton("OK") { _, _ ->
+
+            }
+            create()
+            show()
+        }
+
+        return true
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                getMyLocation()
+            }
+        }
+
+    private fun getMyLocation() {
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap.isMyLocationEnabled = true
+        } else {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
     }
 
     companion object {
         const val ID = "id"
     }
+
+
 }
