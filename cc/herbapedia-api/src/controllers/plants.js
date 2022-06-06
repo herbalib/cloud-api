@@ -30,7 +30,25 @@ const index = (req, res) => {
 
   const sql_benefit = "SELECT id, name, plant_id FROM benefits WHERE plant_id = ?"
   const sql_nutrition = "SELECT n.id, n.name, pn.plant_id FROM nutritions n INNER JOIN plants_nutritions pn ON pn.nutrition_id = n.id WHERE plant_id = ?"
-  const sql_location = "SELECT id, lat, lon, description, plant_id FROM locations WHERE plant_id = ?"
+  // Find location less than 5 km
+  const sql_location = `SELECT 
+                        id, 
+                        lat, 
+                        lon, 
+                        description, 
+                        plant_id 
+                        (
+                           6371 *
+                           acos(cos(radians(?)) * 
+                           cos(radians(lat)) * 
+                           cos(radians(lon) - 
+                           radians(?)) + 
+                           sin(radians(?)) * 
+                           sin(radians(lat)))
+                        ) AS distance 
+                        FROM locations 
+                        WHERE plant_id = ?
+                        HAVING distance < 5`
 
   con.query(sql_plant, query_params, async (query_err, query_res) => {
     if (query_err) return res.status(200).json({
@@ -45,7 +63,7 @@ const index = (req, res) => {
 
         // Only return Location for Detail Page
         if (req.params.id) {
-          const locations = await query_select(con, sql_location, [plant.id])
+          const locations = await query_select(con, sql_location, [req.query.lat, req.query.lon, req.query.lat, plant.id])
           plants.push({
             ...plant,
             benefits,
