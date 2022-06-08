@@ -2,11 +2,11 @@ FROM node:18.2.0
 
 WORKDIR /api
 
-COPY cc/herbapedia-api/package*.json ./
+COPY package*.json ./
 
 RUN npm install
 
-COPY cc/herbapedia-api/ .
+COPY . .
 
 ENV PORT 23450
 
