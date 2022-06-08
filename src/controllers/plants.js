@@ -109,19 +109,22 @@ const predict = async (req, res) => {
 
       try {
         // Import the Model (Through file or local API)
-        const model = await tf.loadLayersModel('file://src/model/model.json')
-        // console.log(model.summary());
+        // const model = await tf.loadLayersModel('file://src/model/model.json')
         // const model = await tf.loadLayersModel('http://localhost:23450/model/model.json')
+        // Using Cloud Storage
+        const model = await tf.loadLayersModel('https://storage.googleapis.com/herbapedia-asset/model/model.json')
+        // console.log(model.summary());
 
         // Predict the File
         const prediction = model.predict(tensor_3d_original)
         const idx_pred = prediction.argMax(-1).dataSync()[0]
-        console.log(plant_names[idx_pred])
+
+        const plant = await query_select(con, 'SELECT id FROM plants WHERE name LIKE ?', [`%${plant_names[idx_pred]}%`])
 
         res.json({
           error: '',
           success: `Predict Plant Data Success`,
-          plant_name: plant_names[idx_pred]
+          plant_id: plant[0].id
         });
       } catch (catch_err) {
         console.log(catch_err)
