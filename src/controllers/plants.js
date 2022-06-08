@@ -94,15 +94,17 @@ const index = (req, res) => {
 }
 
 const predict = async (req, res) => {
+  const plant_names = ['Andong', 'Bayam Duri', 'Binahong', 'Cincau Hijau', 'Jeruk Nipis', 'Kelor', 'Kemangi', 'Kumis Kucing', 'Meniran', 'Mint', 'Pandan', 'Pepaya', 'Sambiloto', 'Sembung', 'Serai', 'Singkong', 'Sirih', 'Talas']
   await Jimp.read(req.file.buffer)
     .then(async image => {
       // For Image Visualization
-      // tensor_3d_original = tf.tensor(image.bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose([0, 2, 1]);
+      // tensor_3d_visual= tf.tensor(image.bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose([0, 2, 1]);
       // tensor_3d_flat = tensor_3d_original.clone().reshape([3, -1])
+      // tf.print(tensor_3d_visual, true)
 
       // For Prediction
-      tensor_3d_original = tf.tensor(image.resize(384, 384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose().reshape([image.bitmap.height, image.bitmap.width, -1]);
-      // console.log('Input Shape ' + tensor_3d_original.shape)
+      tensor_3d_original = tf.tensor(image.resize(384, 384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose().reshape([image.bitmap.height, image.bitmap.width, -1]).expandDims(0);
+      console.log('Input Shape ' + tensor_3d_original.shape)
       // tf.print(tensor_3d_original)
 
       try {
@@ -112,10 +114,14 @@ const predict = async (req, res) => {
         // const model = await tf.loadLayersModel('http://localhost:23450/model/model.json')
 
         // Predict the File
-        // const prediction = model.predict(tensor_3d_original)
+        const prediction = model.predict(tensor_3d_original)
+        const idx_pred = prediction.argMax(-1).dataSync()[0]
+        console.log(plant_names[idx_pred])
+
         res.json({
           error: '',
-          success: 'Predict Plant Data Success'
+          success: `Predict Plant Data Success`,
+          plant_name: plant_names[idx_pred]
         });
       } catch (catch_err) {
         console.log(catch_err)
