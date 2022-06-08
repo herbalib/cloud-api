@@ -1,4 +1,5 @@
 # Logs
+temp_model
 .env
 logs
 *.log

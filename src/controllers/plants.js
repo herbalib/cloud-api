@@ -103,20 +103,22 @@ const predict = async (req, res) => {
       // tf.print(tensor_3d_visual, true)
 
       // For Prediction
-      tensor_3d_original = tf.tensor(image.resize(384, 384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose().reshape([image.bitmap.height, image.bitmap.width, -1]).expandDims(0);
-      console.log('Input Shape ' + tensor_3d_original.shape)
-      // tf.print(tensor_3d_original)
+      tensor_3d_original = tf.tensor(image.resize(384, 384).bitmap.data).reshape([image.bitmap.height, image.bitmap.width, -1]).transpose().slice([0, 0, 0], [3, image.bitmap.width, image.bitmap.height]).transpose();
+      tensor_3d_flat = tensor_3d_original.clone().cast('float32').reshape([3, -1]).dataSync().map(px => px * (1 / 255))
+      tensor_final = tf.tensor1d(tensor_3d_flat).reshape([image.bitmap.height, image.bitmap.width, -1]).expandDims(0)
+      // console.log('Input Shape ' + tensor_final.shape)
+      // tf.print(tensor_final)
 
       try {
         // Import the Model (Through file or local API)
-        // const model = await tf.loadLayersModel('file://src/model/model.json')
+        // const model = await tf.loadLayersModel('file://temp_model/model.json')
         // const model = await tf.loadLayersModel('http://localhost:23450/model/model.json')
         // Using Cloud Storage
         const model = await tf.loadLayersModel('https://storage.googleapis.com/herbapedia-asset/model/model.json')
         // console.log(model.summary());
 
         // Predict the File
-        const prediction = model.predict(tensor_3d_original)
+        const prediction = model.predict(tensor_final)
         const idx_pred = prediction.argMax(-1).dataSync()[0]
 
         const plant = await query_select(con, 'SELECT id FROM plants WHERE name LIKE ?', [`%${plant_names[idx_pred]}%`])
