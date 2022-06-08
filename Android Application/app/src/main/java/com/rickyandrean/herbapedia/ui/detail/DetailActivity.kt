@@ -2,6 +2,7 @@ package com.rickyandrean.herbapedia.ui.detail
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.os.Build
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.rickyandrean.herbapedia.R
 import com.rickyandrean.herbapedia.databinding.ActivityDetailBinding
 import com.rickyandrean.herbapedia.model.PlantsItem
+import com.rickyandrean.herbapedia.storage.Global
 
 
 class DetailActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -47,12 +49,20 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMark
 
         setupView()
 
-        detailViewModel.loadPlant(intent.getIntExtra(ID, 0))
+        //detailViewModel.loadPlant(intent.getIntExtra(ID, 0))
+        detailViewModel.loadPlant(Global.PLANT_ID)
         detailViewModel.plant.observe(this) {
             updateScreen(it.plants[0])
-
             val mapFragment = supportFragmentManager.findFragmentById(R.id.map_detail) as SupportMapFragment
             mapFragment.getMapAsync(this)
+        }
+        detailViewModel.addStatus.observe(this){
+            if (it) {
+                val intent = Intent(this, DetailActivity::class.java)
+                detailViewModel.loadPlant(Global.PLANT_ID)
+                startActivity(intent)
+                finish()
+            }
         }
 
         binding.fabAddPin.setOnClickListener {
@@ -217,6 +227,4 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMark
     companion object {
         const val ID = "id"
     }
-
-
 }

@@ -9,6 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.rickyandrean.herbapedia.databinding.ItemPlantBinding
 import com.rickyandrean.herbapedia.model.PlantsItem
+import com.rickyandrean.herbapedia.storage.Global
 import com.rickyandrean.herbapedia.ui.detail.DetailActivity
 
 class PlantAdapter(private val listPlant: List<PlantsItem>): RecyclerView.Adapter<PlantAdapter.PlantViewHolder>() {
@@ -43,7 +44,8 @@ class PlantAdapter(private val listPlant: List<PlantsItem>): RecyclerView.Adapte
 
             binding.btnReadMore.setOnClickListener {
                 val intent = Intent(itemView.context, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.ID, plant.id)
+                //intent.putExtra(DetailActivity.ID, plant.id)
+                Global.PLANT_ID = plant.id
                 itemView.context.startActivity(intent)
             }
         }

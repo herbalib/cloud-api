@@ -18,9 +18,15 @@ import retrofit2.Response
 class DetailViewModel: ViewModel() {
     private val _loading = MutableLiveData<Boolean>()
     private val _plant = MutableLiveData<PlantResponse>()
+    private val _addStatus = MutableLiveData<Boolean>()
 
     val loading: LiveData<Boolean> = _loading
     val plant: LiveData<PlantResponse> = _plant
+    val addStatus: LiveData<Boolean> = _addStatus
+
+    init {
+        _addStatus.value = false
+    }
 
     fun loadPlant(id: Int) {
         val client = ApiConfig.getApiService().detailPlant(id.toString(), MainActivity.lat, MainActivity.lon, "application/json", "Bearer ${MainActivity.token}")
@@ -55,6 +61,7 @@ class DetailViewModel: ViewModel() {
                 if(response.isSuccessful) {
                     if (response.body()!!.error == "") {
                         Log.d(TAG, response.body()!!.success)
+                        _addStatus.value = true
                     } else {
                         Log.d(TAG, response.body()!!.error)
                     }
