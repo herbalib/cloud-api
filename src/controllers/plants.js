@@ -111,10 +111,10 @@ const predict = async (req, res) => {
 
       try {
         // Import the Model (Through file or local API)
-        // const model = await tf.loadLayersModel('file://temp_model/model.json')
+        const model = await tf.loadLayersModel('file://src/model/model.json')
         // const model = await tf.loadLayersModel('http://localhost:23450/model/model.json')
         // Using Cloud Storage
-        const model = await tf.loadLayersModel('https://storage.googleapis.com/herbapedia-asset/model/model.json')
+        // const model = await tf.loadLayersModel('https://storage.googleapis.com/herbapedia-asset/model/model.json')
         // console.log(model.summary());
 
         // Predict the File
