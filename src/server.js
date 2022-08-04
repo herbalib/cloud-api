@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 
-// Import all module
+// Import all modulee
 const plants = require("./routes/plants.js");
 const auth = require("./routes/auth.js");
 const locations = require("./routes/locations.js");
